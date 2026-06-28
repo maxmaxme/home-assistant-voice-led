@@ -17,7 +17,7 @@ const tabs = [
         </div>
       </template>
       <template #builder>
-        <div class="mt-4 text-[var(--ui-text-muted)]">Builder coming soon</div>
+        <EffectBuilder class="mt-4" />
       </template>
     </UTabs>
   </UContainer>
