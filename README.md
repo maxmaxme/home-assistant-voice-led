@@ -1,75 +1,25 @@
-# Nuxt Minimal Starter
+# home-assistant-voice-led
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A reference cheat-sheet and generator for the Home Assistant Voice PE LED-ring
+effects. Static site (Nuxt 4 + Nuxt UI 4), deployed to GitHub Pages.
 
-## Setup
+Live site: https://maxmaxme.github.io/home-assistant-voice-led/
 
-Make sure to install dependencies:
+## Development
 
-```bash
-# npm
-npm install
+    npm install
+    npm run dev      # http://localhost:3000
+    npm test         # unit tests for the engine and YAML generator
 
-# pnpm
-pnpm install
+## Static build
 
-# yarn
-yarn install
+    npm run generate # → .output/public
 
-# bun
-bun install
-```
+## Deploy
 
-## Development Server
+Pushing to `main` runs `.github/workflows/deploy.yml`.
+Enable Pages once: Settings → Pages → Source = GitHub Actions.
 
-Start the development server on `http://localhost:3000`:
+## License
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+MIT — see [LICENSE](LICENSE).
