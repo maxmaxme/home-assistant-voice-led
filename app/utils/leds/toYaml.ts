@@ -26,14 +26,19 @@ export function toYaml(d: EffectDescriptor, name: string): string {
     '    update_interval: 50ms',
     '    lambda: |-',
   ]
-  const body: string[] = ['      static int frame = 0;', '      const int n = it.size();', `      ${colorCtor(d.color)}`]
 
   if (d.type === 'solid') {
+    const body: string[] = ['      const int n = it.size();', `      ${colorCtor(d.color)}`]
     body.push('      for (int i = 0; i < n; i++) it[i] = base;')
     for (const ind of d.indicators) {
       body.push(`      if (n > ${ind.index}) it[${ind.index}] = Color(${ind.color.r}, ${ind.color.g}, ${ind.color.b});`)
     }
-  } else if (d.type === 'rotate') {
+    return [...header, ...body].join('\n')
+  }
+
+  const body: string[] = ['      static int frame = 0;', '      const int n = it.size();', `      ${colorCtor(d.color)}`]
+
+  if (d.type === 'rotate') {
     const dir = d.direction === 'cw' ? '' : 'n - '
     body.push(
       `      int head = ${dir}(frame % n);`,
@@ -63,7 +68,7 @@ export function toYaml(d: EffectDescriptor, name: string): string {
     body.push(
       `      int reach = ${reach};`,
       '      for (int i = 0; i < n; i++) {',
-      '        int dd = abs(i); int dist = dd < n - dd ? dd : n - dd;',
+      '        int dist = i < n - i ? i : n - i;',
       '        it[i] = dist == reach ? base : Color(0,0,0);',
       '      }',
     )

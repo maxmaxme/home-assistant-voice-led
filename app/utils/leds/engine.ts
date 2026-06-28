@@ -2,6 +2,7 @@ import type { PreviewDescriptor, RGB } from './types'
 import { LED_COUNT } from './types'
 
 const BLACK: RGB = { r: 0, g: 0, b: 0 }
+const RED: RGB = { r: 255, g: 0, b: 0 }
 
 function scale(c: RGB, k: number): RGB {
   const kk = Math.max(0, Math.min(1, k))
@@ -71,15 +72,17 @@ export function ledColor(index: number, timeMs: number, d: PreviewDescriptor): R
       const frame = Math.floor(timeMs / 120)
       return hash(index, frame) < d.probability ? d.color : BLACK
     }
-    case 'rainbow':
-      return hsv(((index / LED_COUNT) + timeMs / 4000) % 1, 1, 1)
+    case 'rainbow': {
+      const w = Math.max(1, d.width)
+      return hsv(((index / w) + timeMs / 4000) % 1, 1, 1)
+    }
     case 'mute': {
-      if (d.muted && (index === 3 || index === 9)) return { r: 255, g: 0, b: 0 }
-      if (d.silent && (index === 6 || index === 7)) return { r: 255, g: 0, b: 0 }
+      if (d.muted && (index === 3 || index === 9)) return RED
+      if (d.silent && (index === 6 || index === 7)) return RED
       return d.color
     }
     case 'volume': {
-      if (d.level === 0 && index === 6) return { r: 255, g: 0, b: 0 }
+      if (d.level === 0 && index === 6) return RED
       const lit = Math.round(d.level * LED_COUNT)
       return index < lit ? d.color : BLACK
     }

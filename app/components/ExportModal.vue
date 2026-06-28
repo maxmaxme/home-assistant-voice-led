@@ -16,6 +16,7 @@ async function copy() {
         Paste this block into the <code>effects:</code> list under your
         <code>light:</code> with <code>id: voice_assistant_leds</code>, then wire
         it up with a script yourself.
+        Note: preview-only parameters (speed, brightness, min brightness, twinkle probability) are not encoded here — tune <code>update_interval</code> and brightness directly in ESPHome.
       </p>
       <pre class="text-xs overflow-x-auto p-3 rounded bg-[var(--ui-bg-muted)]">{{ code }}</pre>
       <UButton class="mt-3" icon="i-lucide-copy" @click="copy">Copy</UButton>
