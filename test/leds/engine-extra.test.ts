@@ -33,6 +33,21 @@ describe('engine rainbow + twinkle', () => {
     const c = ledColor(0, 0, rb)
     expect(c.r + c.g + c.b).toBeGreaterThan(0)
   })
+  it('rainbow hue differs across leds when width is small', () => {
+    // With width=4 the hue increments by 1/4 per LED, so leds 0 and 1 produce different hues
+    const rb: RainbowEffect = { type: 'rainbow', width: 4 }
+    const c0 = ledColor(0, 0, rb)
+    const c1 = ledColor(1, 0, rb)
+    expect(c0).not.toEqual(c1)
+  })
+  it('rainbow produces different colors for different widths at same index/time', () => {
+    const narrow: RainbowEffect = { type: 'rainbow', width: 1 }
+    const wide: RainbowEffect = { type: 'rainbow', width: 12 }
+    // At index=6, the hue offset differs between width=1 and width=12
+    const cn = ledColor(6, 0, narrow)
+    const cw = ledColor(6, 0, wide)
+    expect(cn).not.toEqual(cw)
+  })
   it('twinkle is deterministic for the same index/time', () => {
     const t: TwinkleEffect = { type: 'twinkle', color: C, probability: 0.5 }
     expect(ledColor(4, 700, t)).toEqual(ledColor(4, 700, t))

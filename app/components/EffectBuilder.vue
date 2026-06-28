@@ -66,6 +66,48 @@ const code = computed(() => toYaml(descriptor.value, name.value))
           :items="[{ label: 'Single spot', value: 'single' }, { label: 'Two spots', value: 'dual' }, { label: 'Whole ring', value: 'full' }]"
         />
       </UFormField>
+      <UFormField v-if="'brightness' in descriptor" label="Brightness">
+        <UInput v-model.number="(descriptor as any).brightness" type="number" min="0" max="1" step="0.1" />
+      </UFormField>
+      <UFormField v-if="'minBrightness' in descriptor" label="Min brightness">
+        <UInput v-model.number="(descriptor as any).minBrightness" type="number" min="0" max="1" step="0.1" />
+      </UFormField>
+      <UFormField v-if="'probability' in descriptor" label="Twinkle probability">
+        <UInput v-model.number="(descriptor as any).probability" type="number" min="0" max="1" step="0.05" />
+      </UFormField>
+      <UFormField v-if="'width' in descriptor" label="Width">
+        <UInput v-model.number="(descriptor as any).width" type="number" min="1" max="12" />
+      </UFormField>
+      <template v-if="'indicators' in descriptor">
+        <UFormField label="Indicators">
+          <div class="space-y-2">
+            <div
+              v-for="(ind, idx) in (descriptor as any).indicators"
+              :key="idx"
+              class="flex items-center gap-2"
+            >
+              <UInput v-model.number="ind.index" type="number" min="0" max="11" class="w-20" />
+              <input
+                type="color"
+                :value="rgbToHex(ind.color)"
+                @input="ind.color = hexToRgb(($event.target as HTMLInputElement).value)"
+                class="h-9 w-10 rounded"
+              />
+              <UButton
+                color="error"
+                variant="ghost"
+                icon="i-lucide-trash-2"
+                @click="(descriptor as any).indicators.splice(idx, 1)"
+              />
+            </div>
+            <UButton
+              variant="outline"
+              icon="i-lucide-plus"
+              @click="(descriptor as any).indicators.push({ index: 0, color: { r: 255, g: 0, b: 0 } })"
+            >Add indicator</UButton>
+          </div>
+        </UFormField>
+      </template>
       <UButton icon="i-lucide-code" @click="exportOpen = true">Export</UButton>
     </div>
 
