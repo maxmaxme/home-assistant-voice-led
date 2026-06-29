@@ -25,3 +25,6 @@ logs
 
 # Workflow scratch (plans, ledger, review packages)
 .superpowers
+
+# Local design docs (kept out of the public repo)
+docs
