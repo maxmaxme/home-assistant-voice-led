@@ -112,7 +112,7 @@ const code = computed(() => toYaml(descriptor.value, name.value))
     </div>
 
     <div class="flex items-center justify-center">
-      <LedRing :descriptor="descriptor" :size="220" />
+      <DeviceHero :descriptor="descriptor" :size="360" />
     </div>
 
     <ExportModal v-model:open="exportOpen" :code="code" />
