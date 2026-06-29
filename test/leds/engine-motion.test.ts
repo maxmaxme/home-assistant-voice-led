@@ -25,6 +25,21 @@ describe('engine pulse full', () => {
   })
 })
 
+describe('engine pulse dual', () => {
+  const p: PulseEffect = { type: 'pulse', color: C, speed: 1, mode: 'dual', minBrightness: 0 }
+  it('lights two opposite leds in place and leaves the rest off', () => {
+    const t = 500
+    expect(ledColor(1, t, p).a).toBeGreaterThan(0)
+    expect(ledColor(7, t, p).a).toBeGreaterThan(0)
+    expect(ledColor(0, t, p).a).toBe(0)
+    expect(ledColor(3, t, p).a).toBe(0)
+  })
+  it('does not rotate the lit pair over time', () => {
+    expect(ledColor(1, 500, p).a).toBeGreaterThan(0)
+    expect(ledColor(1, 1500, p).a).toBeGreaterThan(0)
+  })
+})
+
 describe('engine wave', () => {
   const w: WaveEffect = { type: 'wave', color: C, speed: 1, direction: 'out' }
   it('is mirror-symmetric across the ring', () => {

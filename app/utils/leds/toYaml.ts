@@ -59,9 +59,9 @@ export function toYaml(d: EffectDescriptor, name: string): string {
     if (d.mode === 'full') {
       body.push('      for (int i = 0; i < n; i++) it[i] = base * v;')
     } else if (d.mode === 'single') {
-      body.push('      int head = frame % n;', '      for (int i = 0; i < n; i++) it[i] = i == head ? base * v : Color(0,0,0);')
+      body.push('      for (int i = 0; i < n; i++) it[i] = i == 1 ? base * v : Color(0,0,0);')
     } else {
-      body.push('      int head = frame % n;', '      for (int i = 0; i < n; i++) it[i] = (i == head || i == (head + n/2) % n) ? base * v : Color(0,0,0);')
+      body.push('      for (int i = 0; i < n; i++) it[i] = (i == 1 || i == 1 + n/2) ? base * v : Color(0,0,0);')
     }
   } else if (d.type === 'wave') {
     const reach = d.direction === 'out' ? 'frame % 7' : '6 - (frame % 7)'

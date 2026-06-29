@@ -66,9 +66,11 @@ export function ledColor(index: number, timeMs: number, d: PreviewDescriptor): R
       const tri = phase < 0.5 ? phase * 2 : (1 - phase) * 2
       const k = d.minBrightness + (1 - d.minBrightness) * tri
       if (d.mode === 'full') return dim(d.color, k)
-      const head = frame % LED_COUNT
-      if (d.mode === 'single') return index === head ? dim(d.color, k) : OFF
-      return index === head || index === (head + LED_COUNT / 2) % LED_COUNT ? dim(d.color, k) : OFF
+      // single/dual spots pulse in place (they do not rotate around the ring).
+      const a = 1
+      const b = a + LED_COUNT / 2
+      if (d.mode === 'single') return index === a ? dim(d.color, k) : OFF
+      return index === a || index === b ? dim(d.color, k) : OFF
     }
     case 'wave': {
       const frame = step(timeMs, d.speed)
