@@ -38,7 +38,8 @@ function pos(i: number, r: number, c: number) {
   const a = (i / LED_COUNT) * Math.PI * 2 - Math.PI / 2
   return { x: c + r * Math.cos(a), y: c + r * Math.sin(a) }
 }
-const rgb = (c: RGB) => `rgb(${c.r},${c.g},${c.b})`
+// An unlit LED emits no light → render it transparent instead of a black dot.
+const paint = (c: RGB) => (c.r + c.g + c.b === 0 ? 'transparent' : `rgb(${c.r},${c.g},${c.b})`)
 </script>
 
 <template>
@@ -50,8 +51,8 @@ const rgb = (c: RGB) => `rgb(${c.r},${c.g},${c.b})`
       :cx="pos(i, orbitR, size / 2).x"
       :cy="pos(i, orbitR, size / 2).y"
       :r="dotR"
-      :fill="rgb(c)"
-      :stroke="rgb(c)"
+      :fill="paint(c)"
+      :stroke="paint(c)"
       stroke-width="1"
     />
   </svg>
