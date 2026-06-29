@@ -72,6 +72,13 @@ export function toYaml(d: EffectDescriptor, name: string): string {
       '        it[i] = dist == reach ? base : Color(0,0,0);',
       '      }',
     )
+  } else if (d.type === 'breathing') {
+    body.push(
+      '      float phase = (frame % 60) / 60.0f;',
+      `      float k = ${d.minBrightness.toFixed(2)}f + (1 - ${d.minBrightness.toFixed(2)}f) * (0.5f - 0.5f * cosf(phase * 2 * 3.14159265f));`,
+      '      uint8_t v = (uint8_t)(k * 255);',
+      '      for (int i = 0; i < n; i++) it[i] = base * v;',
+    )
   }
 
   body.push('      frame++;')

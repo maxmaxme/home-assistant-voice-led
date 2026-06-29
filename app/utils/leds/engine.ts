@@ -68,6 +68,12 @@ export function ledColor(index: number, timeMs: number, d: PreviewDescriptor): R
       const reach = d.direction === 'out' ? frame % 7 : 6 - (frame % 7)
       return ringDist(index, 0) === reach ? d.color : BLACK
     }
+    case 'breathing': {
+      const frame = step(timeMs, d.speed)
+      const phase = (frame % 60) / 60
+      const k = d.minBrightness + (1 - d.minBrightness) * (0.5 - 0.5 * Math.cos(phase * 2 * Math.PI))
+      return scale(d.color, k)
+    }
     case 'twinkle': {
       const frame = Math.floor(timeMs / 120)
       return hash(index, frame) < d.probability ? d.color : BLACK

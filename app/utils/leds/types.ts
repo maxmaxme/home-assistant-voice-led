@@ -30,6 +30,13 @@ export interface WaveEffect {
   direction: 'out' | 'in'
 }
 
+export interface BreathingEffect {
+  type: 'breathing'
+  color: RGB
+  speed: number
+  minBrightness: number
+}
+
 export interface SolidEffect {
   type: 'solid'
   color: RGB
@@ -51,6 +58,7 @@ export type EffectDescriptor =
   | RotateEffect
   | PulseEffect
   | WaveEffect
+  | BreathingEffect
   | SolidEffect
   | TwinkleEffect
   | RainbowEffect
@@ -74,6 +82,7 @@ export const PRESET_DEFAULTS: Record<EffectDescriptor['type'], EffectDescriptor>
   rotate: { type: 'rotate', color: { r: 24, g: 187, b: 242 }, speed: 1, direction: 'cw', tail: 3, brightness: 1 },
   pulse: { type: 'pulse', color: { r: 24, g: 187, b: 242 }, speed: 1, mode: 'dual', minBrightness: 0 },
   wave: { type: 'wave', color: { r: 24, g: 187, b: 242 }, speed: 1, direction: 'out' },
+  breathing: { type: 'breathing', color: { r: 24, g: 187, b: 242 }, speed: 1, minBrightness: 0 },
   solid: { type: 'solid', color: { r: 24, g: 187, b: 242 }, indicators: [] },
   twinkle: { type: 'twinkle', color: { r: 24, g: 187, b: 242 }, probability: 0.5 },
   rainbow: { type: 'rainbow', width: 12 },

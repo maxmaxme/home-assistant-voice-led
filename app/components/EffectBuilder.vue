@@ -8,6 +8,7 @@ const presetItems = [
   { label: 'Rotate', value: 'rotate' },
   { label: 'Pulse', value: 'pulse' },
   { label: 'Wave', value: 'wave' },
+  { label: 'Breathing', value: 'breathing' },
   { label: 'Solid', value: 'solid' },
   { label: 'Twinkle', value: 'twinkle' },
   { label: 'Rainbow', value: 'rainbow' },
