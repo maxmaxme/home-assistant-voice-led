@@ -7,12 +7,12 @@ const C = { r: 100, g: 100, b: 100 }
 describe('engine rotate', () => {
   const rot: RotateEffect = { type: 'rotate', color: C, speed: 1, direction: 'cw', tail: 0, brightness: 1 }
   it('lights the head led at frame 0 and leaves others dark with no tail', () => {
-    expect(ledColor(0, 0, rot)).toEqual(C)
-    expect(ledColor(1, 0, rot)).toEqual({ r: 0, g: 0, b: 0 })
+    expect(ledColor(0, 0, rot)).toEqual({ ...C, a: 1 })
+    expect(ledColor(1, 0, rot)).toEqual({ r: 0, g: 0, b: 0, a: 0 })
   })
   it('advances the head by one led after one step', () => {
-    expect(ledColor(1, 100, rot)).toEqual(C)
-    expect(ledColor(0, 100, rot)).toEqual({ r: 0, g: 0, b: 0 })
+    expect(ledColor(1, 100, rot)).toEqual({ ...C, a: 1 })
+    expect(ledColor(0, 100, rot)).toEqual({ r: 0, g: 0, b: 0, a: 0 })
   })
 })
 

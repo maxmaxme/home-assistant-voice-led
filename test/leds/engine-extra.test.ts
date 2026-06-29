@@ -8,22 +8,22 @@ const RED = { r: 255, g: 0, b: 0 }
 describe('engine mute', () => {
   const m: MuteEffect = { type: 'mute', color: C, muted: true, silent: false }
   it('marks leds 3 and 9 red when muted', () => {
-    expect(ledColor(3, 0, m)).toEqual(RED)
-    expect(ledColor(9, 0, m)).toEqual(RED)
-    expect(ledColor(0, 0, m)).toEqual(C)
+    expect(ledColor(3, 0, m)).toEqual({ ...RED, a: 1 })
+    expect(ledColor(9, 0, m)).toEqual({ ...RED, a: 1 })
+    expect(ledColor(0, 0, m)).toEqual({ ...C, a: 1 })
   })
 })
 
 describe('engine volume', () => {
   it('lights the first N leds for the level', () => {
     const v: VolumeEffect = { type: 'volume', color: C, level: 0.5 }
-    expect(ledColor(0, 0, v)).toEqual(C)
-    expect(ledColor(5, 0, v)).toEqual(C)
-    expect(ledColor(11, 0, v)).toEqual({ r: 0, g: 0, b: 0 })
+    expect(ledColor(0, 0, v)).toEqual({ ...C, a: 1 })
+    expect(ledColor(5, 0, v)).toEqual({ ...C, a: 1 })
+    expect(ledColor(11, 0, v)).toEqual({ r: 0, g: 0, b: 0, a: 0 })
   })
   it('shows red on led 6 at zero level', () => {
     const v: VolumeEffect = { type: 'volume', color: C, level: 0 }
-    expect(ledColor(6, 0, v)).toEqual(RED)
+    expect(ledColor(6, 0, v)).toEqual({ ...RED, a: 1 })
   })
 })
 

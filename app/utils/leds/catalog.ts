@@ -11,7 +11,7 @@ export interface CatalogEntry {
 const BLUE = { r: 24, g: 187, b: 242 }
 
 export const CATALOG: CatalogEntry[] = [
-  { id: 'idle', title: 'Idle', phase: 'idle', description: 'Off or a steady blue ring — waiting for the wake word.', descriptor: { type: 'solid', color: BLUE, indicators: [] } },
+  { id: 'idle', title: 'Idle', phase: 'idle', description: 'LEDs off, waiting for the wake word (unless you turn the ring light on).', descriptor: { type: 'solid', color: { r: 0, g: 0, b: 0 }, indicators: [] } },
   { id: 'waiting', title: 'Ready for command', phase: 'waiting', description: 'Slow clockwise rotation after the wake word.', descriptor: { type: 'rotate', color: BLUE, speed: 1, direction: 'cw', tail: 4, brightness: 1 } },
   { id: 'listening', title: 'Listening', phase: 'listening', description: 'Fast clockwise rotation while listening to the command.', descriptor: { type: 'rotate', color: BLUE, speed: 2, direction: 'cw', tail: 4, brightness: 1 } },
   { id: 'thinking', title: 'Thinking', phase: 'thinking', description: 'Two opposite spots pulse while the request is processed.', descriptor: { type: 'pulse', color: BLUE, speed: 3, mode: 'dual', minBrightness: 0 } },

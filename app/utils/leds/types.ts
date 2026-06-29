@@ -6,6 +6,13 @@ export interface RGB {
   b: number
 }
 
+// What the engine renders per LED: a color plus an alpha (0 = off/transparent,
+// 1 = full glow). On the white device a dim LED reads as a faint glow, not a
+// dark dot, so brightness is modelled as alpha rather than darkening the color.
+export interface RGBA extends RGB {
+  a: number
+}
+
 export interface RotateEffect {
   type: 'rotate'
   color: RGB

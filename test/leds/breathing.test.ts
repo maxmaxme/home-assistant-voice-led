@@ -17,9 +17,9 @@ describe('engine breathing', () => {
     for (let i = 1; i < 12; i++) expect(ledColor(i, t, breathing)).toEqual(a)
   })
 
-  it('is dark at the start of the cycle and full at the peak', () => {
-    expect(ledColor(0, 0, breathing)).toEqual({ r: 0, g: 0, b: 0 })
-    expect(ledColor(0, 3000, breathing)).toEqual({ r: 24, g: 187, b: 242 })
+  it('is transparent at the start of the cycle and full at the peak', () => {
+    expect(ledColor(0, 0, breathing)).toEqual({ r: 24, g: 187, b: 242, a: 0 })
+    expect(ledColor(0, 3000, breathing)).toEqual({ r: 24, g: 187, b: 242, a: 1 })
   })
 })
 
